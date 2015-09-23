@@ -1,0 +1,18 @@
+/**
+ * Created by PeskoM on 16/09/2015.
+ */
+/* GET 'about us' page */
+module.exports.about = function(req, res){
+    res.render('generic-text', {
+        title: 'About Loc8r',
+        content:'Loc8r was created to help people find places to sit down and get a bit of work done.' +
+        '\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at blandit urna, et sollicitudin erat. Donec nec faucibus nibh. Maecenas ut orci eget ex molestie accumsan. Fusce rutrum nisi vitae odio finibus pretium. Aliquam nec pretium felis, convallis tempus sem. Donec dignissim, arcu ac mollis feugiat, orci dui sollicitudin urna, vel rhoncus metus diam sit amet urna. Proin pharetra a ante id fringilla. Morbi feugiat id odio in viverra. Interdum et malesuada fames ac ante ipsum primis in faucibus. Phasellus id feugiat nunc. Vivamus ultrices finibus malesuada. Proin rutrum ut eros eu ullamcorper. Nullam luctus sagittis elementum.Mauris dolor elit, scelerisque nec fermentum in, consectetur id tellus. Proin nisi purus, viverra congue venenatis sed, porttitor a ex. Curabitur congue finibus neque quis congue. Etiam imperdiet augue quis lectus mattis, sit amet lacinia lacus aliquam. Etiam turpis dui, dapibus vel volutpat non, blandit in nulla. Nulla facilisi. Vestibulum euismod aliquam enim ac mollis. Donec fringilla eros at dui volutpat, vel elementum nisl eleifend. Praesent ipsum massa, aliquet quis orci vitae, hendrerit cursus ligula. Vestibulum in purus ut felis efficitur imperdiet. Nullam vitae sapien placerat, varius nibh id, placerat ante. Aenean ac sem ac lorem ullamcorper varius et et metus. Fusce euismod non ex nec mattis.' +
+        '\n\nCras vulputate, metus sed lobortis congue, quam mauris tristique risus, tempor convallis metus tortor lacinia nunc. Nulla vehicula nisl eu luctus ullamcorper. Nulla sed purus vitae lacus tempor faucibus a vel ipsum. Proin hendrerit laoreet massa dapibus dapibus. Sed vitae metus sed tellus pellentesque gravida. Phasellus a elit viverra, pretium velit et, maximus ipsum. Pellentesque hendrerit dui lobortis enim suscipit scelerisque. Nulla in diam sit amet magna semper vehicula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean enim justo, posuere eget odio eu, pharetra accumsan est.' +
+        '\n\nNam at vulputate ex. Morbi porttitor nec nulla in blandit. Sed tincidunt porta sem a varius. Morbi congue, diam vel scelerisque iaculis, dolor ex convallis lectus, eu vestibulum sapien mauris id eros. Vestibulum aliquet orci non purus lacinia bibendum. In efficitur turpis risus, a molestie leo vulputate quis. Proin fermentum magna quis iaculis vestibulum. Integer euismod odio eget elit volutpat ultricies. Vestibulum semper dui rhoncus, ultricies risus id, congue ante. In sodales arcu ac felis viverra porta. Duis dui nisi, tincidunt a erat in, condimentum molestie turpis. Nullam mollis consequat turpis, at gravida ipsum efficitur sit amet. Curabitur maximus vitae leo vel pulvinar. Donec non lacus turpis. Duis at consequat turpis.' +
+        '\n\nDuis laoreet pellentesque metus, ac sodales orci pulvinar quis. Nulla convallis sem quis congue facilisis. Proin aliquam ex et rutrum gravida. Aliquam erat volutpat. Sed efficitur massa odio, non facilisis sem molestie in. Aliquam vestibulum ipsum nulla, eget sollicitudin dolor posuere at. Nam porttitor volutpat augue, congue gravida nulla tempor et. Curabitur vitae aliquam quam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut felis risus, aliquam ac aliquet faucibus, placerat in lacus.'
+    });
+};
+/* GET 'sign in' page */
+module.exports.signin = function(req, res){
+    res.render('signin-index', { title: 'Sign in to Loc8r' });
+};
