@@ -186,12 +186,14 @@ module.exports.locationInfo = function (req, res) {
 };
 
 var renderReviewForm = function (req, res, locDetail) {
+    console.log("++++++tole se je izvedlo");
     res.render('location-review-form', {
         title: 'Review ' + locDetail.name + ' on Loc8r',
         pageHeader: {title: 'Review ' + locDetail.name},
         user: {
             displayName: "Simon Holmes"
-        }
+        },
+        error: req.query.err
     });
 };
 
@@ -216,13 +218,19 @@ module.exports.doAddReview = function (req, res) {
         method: "POST",
         json: postdata
     };
-    request(requestOptions, function (err, response, body) {
+    if (!postdata.author || !postdata.rating || !postdata.reviewText) {
+        res.redirect('/location/' + locationid + '/review/new?err=val');
+    } else {
+      request(requestOptions, function (err, response, body) {
         if (response.statusCode === 201) {
-            res.redirect('/location/' + locationid);
+          res.redirect('/location/' + locationid);
+        } else if (response.statusCode === 400 && body.name && body.name === "ValidationError") {
+          res.redirect('/location/' + locationid + '/review/new?err=val');
         } else {
-            _showError(req, res, response.statusCode);
+          _showError(req, res, response.statusCode);
         }
-    });
+      });
+    }
 };
 
 var _showError = function (req, res, status) {

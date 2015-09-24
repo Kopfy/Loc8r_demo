@@ -24,14 +24,15 @@ require('./app_api/models/db');
 require('./routes')(app);
 require('./app_api/routes')(app);
 
+
+// error handlers
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
-
-// error handlers
 
 // development error handler
 // will print stacktrace
@@ -54,6 +55,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 module.exports = app;
