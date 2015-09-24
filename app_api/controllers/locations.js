@@ -202,23 +202,21 @@ module.exports.locationsDeleteOne = function (req, res) {
     }
 };
 
-var doAddReview = function (req, res, location) {
+var doAddReview = function(req, res, location) {
     if (!location) {
-        sendJsonResponse(res, 404, {
-            "message": "locationid not found"
-        });
+        sendJSONresponse(res, 404, "locationid not found");
     } else {
         location.reviews.push({
-            author: {
-                displayName: req.body.author
-            },
+            author: req.body.author,
             rating: req.body.rating,
             reviewText: req.body.reviewText
         });
-        location.save(function (err, location) {
+        location.save(function(err, location) {
+            console.log("app_api/doAddReview " + err);
+            console.log("app_api/doAddReview " + location);
             var thisReview;
             if (err) {
-                sendJsonResponse(res, 400, err);
+                sendJSONresponse(res, 400, err);
             } else {
                 updateAverageRating(location._id);
                 thisReview = location.reviews[location.reviews.length - 1];
@@ -261,27 +259,26 @@ var doSetAverageRating = function (location) {
 };
 
 module.exports.reviewsCreate = function (req, res) {
-    module.exports.reviewsCreate = function (req, res) {
-        var locationid = req.params.locationid;
-        if (locationid) {
-            Loc
-                .findById(locationid)
-                .select('reviews')
-                .exec(
-                function (err, location) {
-                    if (err) {
-                        sendJsonResponse(res, 400, err);
-                    } else {
-                        doAddReview(req, res, location);
-                    }
+    var locationid = req.params.locationid;
+    if (locationid) {
+        Loc
+            .findById(locationid)
+            .select('reviews')
+            .exec(
+            function (err, location) {
+                if (err) {
+                    sendJsonResponse(res, 400, err);
+                } else {
+                    console.log("app_api/reviewsCreate called doAddReview with location:" + location);
+                    doAddReview(req, res, location);
                 }
-            );
-        } else {
-            sendJsonResponse(res, 404, {
-                "message": "Not found, locationid required"
-            });
-        }
-    };
+            }
+        );
+    } else {
+        sendJsonResponse(res, 404, {
+            "message": "Not found, locationid required"
+        });
+    }
 };
 
 module.exports.reviewsReadOne = function (req, res) {
