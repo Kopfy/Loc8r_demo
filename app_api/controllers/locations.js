@@ -212,11 +212,9 @@ var doAddReview = function(req, res, location) {
             reviewText: req.body.reviewText
         });
         location.save(function(err, location) {
-            console.log("app_api/doAddReview " + err);
-            console.log("app_api/doAddReview " + location);
             var thisReview;
             if (err) {
-                sendJSONresponse(res, 400, err);
+                sendJsonResponse(res, 400, err);
             } else {
                 updateAverageRating(location._id);
                 thisReview = location.reviews[location.reviews.length - 1];
@@ -269,7 +267,6 @@ module.exports.reviewsCreate = function (req, res) {
                 if (err) {
                     sendJsonResponse(res, 400, err);
                 } else {
-                    console.log("app_api/reviewsCreate called doAddReview with location:" + location);
                     doAddReview(req, res, location);
                 }
             }
@@ -290,21 +287,7 @@ module.exports.reviewsReadOne = function (req, res) {
             .select('name reviews')
             .exec(function (err, location) {
                 var response, review;
-
-                console.log("-------- location " + location);
-                console.log("");
-                console.log("");
-                console.log("");
-                console.log("-------- location.reviews: " + location.reviews);
-                console.log("-------- req.params.reviewid: " + req.params.reviewid);
                 review = location.reviews.id(req.params.reviewid);
-                console.log("");
-                console.log("");
-                console.log("");
-                console.log("-------- review: " + review);
-                console.log("");
-                console.log("");
-                console.log("");
                 // console.log("-------- location.reviews.id: " + location.reviews.id);
 
                 if (!location) {
@@ -386,6 +369,7 @@ module.exports.reviewsUpdateOne = function (req, res) {
                     thisReview.reviewText = req.body.reviewText;
                     location.save(function (err, location) {
                         if (err) {
+                            console.log(err);
                             sendJsonResponse(res, 404, err);
                         } else {
                             updateAverageRating(location._id);
